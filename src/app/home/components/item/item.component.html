@@ -1,1 +1,15 @@
-{{user?.name}}
+
+
+
+
+  <div class="card d-flex flex-row align-items-center uve-card">
+    <div class="avatar p-3">
+      {{ user | initials:'name' }}
+    </div>
+    <div class="card-body item">
+      <h5 class="card-title">{{user?.name}}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">{{user?.username}}</h6>
+      <div class="uve-link"><a href="mailto:{{user?.email}}" class="card-link uve-link">{{user?.email}}</a></div>
+      <div class="uve-link"><a href="tel:{{user?.phone}}" class="card-link">{{user?.phone}}</a></div>
+    </div>
+  </div>

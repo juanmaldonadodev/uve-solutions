@@ -1,0 +1,28 @@
+
+
+
+.home {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.header {
+    background: #ccc;
+   // padding: 10px;
+    text-align: center;
+}
+.main {
+    display: flex;
+    flex: 1;
+}
+.sidebar {
+    background: #aaa;
+    width: 250px;
+    //padding: 10px;
+}
+.content {
+    background-color: #5f5f5f;
+    flex: 1;
+    //padding: 10px;
+}

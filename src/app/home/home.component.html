@@ -1,11 +1,9 @@
-<app-header></app-header>
-
-
-<div class="row">
-    <div class="col-3 d-none d-md-block">
-        <app-sidebar></app-sidebar>
+<div class="home">
+    <app-header class="header"></app-header>
+    <div class="main">
+        <app-sidebar class="sidebar d-none d-lg-block"></app-sidebar>
+        <div class="content">
+            <app-items></app-items>
+        </div>
     </div>
-    <div class="col">
-        <app-items></app-items>
-    </div>
-  </div>
+</div>

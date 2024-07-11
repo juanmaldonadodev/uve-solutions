@@ -9,34 +9,27 @@ import { tap } from 'rxjs/operators';
 })
 export class UsersService {
   private readonly API_URL = 'https://jsonplaceholder.typicode.com/users';
-
-  private usersSubject = new BehaviorSubject<User[]>([]);
-  public observable$ = this.usersSubject.asObservable();
-
+  users: User[] = [];
+  searchText: string = '';
+  usersCache: User[] = [];
   constructor(private httpClient: HttpClient) { }
 
-  
-  getUsers(): Observable<User[]> {
-    console.debug('Hello')
-    return this.httpClient.get<User[]>(this.API_URL,{ responseType: 'json' }).pipe(
-      tap(users => {
-        console.table(users);
-        this.usersSubject.next(users)
-      }
-      )
-    );
+  getUsers() {
+    this.httpClient.get<User[]>(this.API_URL).subscribe((data) => {
+      this.usersCache = data;
+      this.users = data;
+    });
   }
 
-  filterUsers(text: string): Observable<User[]> {
-    return this.httpClient.get<User[]>(this.API_URL).pipe(
-      tap(users => {
-        const usersToReturn =  users.filter(user => {
-          return user.name.includes(text);
-        });
-        this.usersSubject.next(usersToReturn)
-      }
-      )
-    );
+  filterUsers(text: string) {
+    this.searchText = text;
+
+    this.users = this.usersCache.filter(obj => {
+      return Object.values(obj).some(value =>
+        value.toString().toLowerCase().includes(text.toLowerCase())
+      );
+    });
   }
+
 
 }

@@ -8,28 +8,16 @@ import { UsersService } from 'src/app/shared/service/users.service';
   templateUrl: './items.component.html',
   styleUrls: ['./items.component.scss']
 })
-export class ItemsComponent implements OnInit, OnDestroy {
-  users: User[] = [];
-  destroy$ = new Subject<void>();
+export class ItemsComponent implements OnInit {
 
-  constructor(private usersService: UsersService) {
-
+  constructor(public usersService: UsersService) {
 
   }
+
   ngOnInit(): void {
-    this.usersService.getUsers();
-    this.usersService.observable$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((users: User[]) => {
-        console.table(users);
-        this.users = (users);
-      });
+    this.usersService.getUsers()
   }
 
-  ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
 
   trackById(user: User) {
     return user.id;

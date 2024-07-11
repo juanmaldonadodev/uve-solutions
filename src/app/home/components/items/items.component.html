@@ -1,4 +1,8 @@
-<app-item *ngFor="let user of users" [user]="user"
->
-</app-item>
 
+
+<div class="row">
+    <div class="col-xl-4 col-lg-5 col-md-12 col-sm-12 " *ngFor="let user of usersService.users; let i = index">
+        <app-item [user]="user">
+        </app-item>
+    </div>
+  </div>
