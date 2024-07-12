@@ -1,8 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../models/user';
-import { tap } from 'rxjs/operators';
+import { take } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +14,9 @@ export class UsersService {
   constructor(private httpClient: HttpClient) { }
 
   getUsers() {
-    this.httpClient.get<User[]>(this.API_URL).subscribe((data) => {
+    this.httpClient.get<User[]>(this.API_URL)
+    .pipe(take(1)) 
+    .subscribe((data) => {
       this.usersCache = data;
       this.users = data;
     });
